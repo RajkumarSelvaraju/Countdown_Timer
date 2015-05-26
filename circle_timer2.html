@@ -1,0 +1,90 @@
+<html>
+<head>
+    <title>TEST</title>
+    <style type="text/css">
+        .circle {
+                  width: 500px;
+                  height: 500px;
+                  background: #4B4A4A;
+                  -moz-border-radius: 50px;
+                  -webkit-border-radius: 50px;
+                  border-radius: 50px;
+                }
+    </style>
+    <script type="text/javascript">
+        function countdown(minutes) {
+            var seconds = 60;
+            var mins = minutes
+            function tick() {
+                var counter = document.getElementById("timer_count");
+                var current_minutes = mins-1
+                seconds--;
+                counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+                if( seconds > 0 ) {
+                    setTimeout(tick, 1000);
+                } else {
+                     
+                    if(mins > 1){
+                         
+                       // countdown(mins-1);   never reach “00″ issue solved:Contributed by Victor Streithorst    
+                       setTimeout(function () { countdown(mins - 1); }, 1000);
+                             
+                    }
+                }
+            }
+            tick();
+        }countdown(2);
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+    var time = 120; /* how long the timer runs for */
+    var initialOffset = '440';
+    var i = 1
+    var interval = setInterval(function() {
+        $('.circle_animation').css('stroke-dashoffset', initialOffset-(i*(initialOffset/time)));
+        $('h2').text(i);
+        if (i == time) {
+            clearInterval(interval);
+        }
+        i++;  
+    }, 1000);
+    </script>
+    <style>
+    .item {
+        position: relative;
+        float: left;
+    }
+    
+    .item h2 {
+        text-align:center;
+        position: absolute;
+        line-height: 125px;
+        width: 100%;
+    }
+    
+    svg {
+       -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+    
+    .circle_animation {
+      stroke-dasharray: 440; /* this value is the pixel circumference of the circle */
+      stroke-dashoffset: 440;
+      transition: all 1s linear;
+    }
+    </style>
+</head>
+<body>
+    <span class="circle" id="timer_count" style="color:white;"><strong>2:00</strong></span>
+    <div class="item html">
+        <h2>0</h2>
+        <svg width="160" height="160">
+         <g>
+          <title>Layer 1</title>
+          <circle id="circle" class="circle_animation" r="69.85699" cy="81" cx="81" stroke-width="16" stroke="#6fdb6f" fill="none"/>
+         </g>
+        </svg>
+    </div>
+</body>
+<script>countdown(2);</script>
+</html>
